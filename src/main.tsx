@@ -7,6 +7,7 @@ import ErrorPage from "./shared/components/error-page";
 import Staff from "./containers/Staff/SingleStaff";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fetchStaffListLoader } from "./loaders/fetchStaffList";
+import { fetchStaffLoader } from "./loaders/fetchStaff";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         path: "/:businessId/staff/:staffId",
         element: <Staff />,
         errorElement: <ErrorPage />,
+        loader: fetchStaffLoader(queryClient),
       },
     ],
   },

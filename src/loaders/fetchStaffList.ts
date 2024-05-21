@@ -6,7 +6,7 @@ const fetchStaffListQuery = ({ businessId }) => ({
   queryKey: staffQueryKeysGenerator.allStaff(businessId),
   queryFn: async () => {
     const data = await get<Record<string, unknown>>({
-      url: `https://dev2.api.yocale.com/api/v5/businesses/${businessId}/staffs`,
+      url: `${import.meta.env.VITE_PUBLIC_API_URL}/api/v5/businesses/${businessId}/staffs`,
       config: {
         //   params,
         //   gtmEventName: "FETCH_STAFF_LIST_BUSINESSES",

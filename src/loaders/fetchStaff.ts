@@ -3,24 +3,30 @@ import { staffQueryKeysGenerator } from "./queryKeys";
 
 const fetchStaffQuery = ({ businessId, staffId }) => ({
   queryKey: staffQueryKeysGenerator.fetchStaff(businessId, staffId),
-  queryFn: get<Record<string, unknown>>({
-    url: `https://dev2.yocale.com/api/v5/businesses/${businessId}/staffs/${staffId}`,
-    config: {
-      //   params,
-      //   gtmEventName: "FETCH_STAFF_LIST_BUSINESSES",
-      //   ...requestConfig,
-    },
-  }),
-  //   .then(({ data }) => data),
+  queryFn: async () => {
+    const data = await get<Record<string, unknown>>({
+      url: `${
+        import.meta.env.VITE_PUBLIC_API_URL
+      }/api/v5/businesses/${businessId}/staffs/${staffId}`,
+      config: {
+        //   params,
+        //   gtmEventName: "FETCH_STAFF_LIST_BUSINESSES",
+        //   ...requestConfig,
+      },
+    });
+
+    return data?.data?.data ?? {};
+  },
 });
 
 export const fetchStaffLoader =
-  (queryClient) =>
-  async ({ businessId, staffId }) => {
+  (queryClient: QueryClient) =>
+  async ({ params }) => {
+    const { businessId, staffId } = params ?? {};
     const query = fetchStaffQuery({ businessId, staffId });
 
     return (
       queryClient.getQueryData(query.queryKey) ||
-      (await queryClient.fetchQuery(query))
+      (await queryClient.fetchQuery({ ...query }))
     );
   };
