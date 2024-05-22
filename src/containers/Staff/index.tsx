@@ -7,13 +7,21 @@ export default function Root() {
   const params = useParams();
   const res = useLoaderData();
   const data = res ?? {};
+  const { businessId } = params ?? {};
 
-
+  // const { data } = useQuery({
+  //   ...fetchStaffListQuery({ ...params }),
+  //   initialData: res,
+  //   staleTime: 1000 * 60 * 2, //add this if you want to cache the data
+  // });
+  const { items } = data ?? {};
+  // console.log({items,res})
   return (
     <>
-      <Outlet />
-      {/* <Suspense fallback={<div>loading main...</div>}>
+      <Suspense fallback={<div>loading main...</div>}>
         <div id="sidebar">
+          <Link to={`/${businessId}/`}>Back to Business</Link>
+          <Link to={`/${businessId}/staff2`}>Back to Staff2</Link>
           <h1>Staff</h1>
           <div>
             <form id="search-form" role="search">
@@ -34,7 +42,7 @@ export default function Root() {
           <h2>Staff List</h2>
           <nav>
             <ul>
-              {items.map((item) => (
+              {items?.map((item) => (
                 <li key={item.id}>
                   <Link to={`/${businessId}/staff/${item.id}`}>
                     {item.firstName} {item.lastName}
@@ -49,7 +57,7 @@ export default function Root() {
             <Outlet />
           </Suspense>
         </div>
-      </Suspense> */}
+      </Suspense>
     </>
   );
 }
