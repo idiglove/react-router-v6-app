@@ -11,7 +11,7 @@ export default function Root() {
   const { data } = useQuery({
     ...fetchStaffListQuery({ ...params }),
     initialData: res,
-    // staleTime: 1000 * 60 * 2, //add this if you want to cache the data
+    staleTime: 1000 * 60 * 2, //add this if you want to cache the data
   });
   const { items } = data ?? {};
 

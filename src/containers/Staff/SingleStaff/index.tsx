@@ -8,7 +8,7 @@ export default function SingleStaff() {
   const { data } = useQuery({
     ...fetchStaffQuery({ ...params }),
     initialData: res,
-    // staleTime: 1000 * 60 * 2,
+    staleTime: 1000 * 60 * 2,
   });
   return (
     <div id="staff">
