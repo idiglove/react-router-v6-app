@@ -1,9 +1,15 @@
-import { Form, useLoaderData } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { Form, Outlet, useLoaderData, useParams } from "react-router-dom";
+import { fetchStaffQuery } from "../../../loaders/fetchStaff";
 
 export default function SingleStaff() {
-  // const params = useParams();
+  const params = useParams();
   const res = useLoaderData();
-  const data = res ?? {};
+  const { data } = useQuery({
+    ...fetchStaffQuery({ ...params }),
+    initialData: res,
+    // staleTime: 1000 * 60 * 2,
+  });
   return (
     <div id="staff">
       <div>
@@ -53,6 +59,8 @@ export default function SingleStaff() {
             <button type="submit">Delete</button>
           </Form>
         </div>
+
+        <Outlet />
       </div>
     </div>
   );

@@ -2,11 +2,13 @@ import { QueryClient } from "@tanstack/react-query";
 import { get } from "../utils/axios";
 import { staffQueryKeysGenerator } from "./queryKeys";
 
-const fetchStaffListQuery = ({ businessId }) => ({
+export const fetchStaffListQuery = ({ businessId }) => ({
   queryKey: staffQueryKeysGenerator.allStaff(businessId),
   queryFn: async () => {
     const data = await get<Record<string, unknown>>({
-      url: `${import.meta.env.VITE_PUBLIC_API_URL}/api/v5/businesses/${businessId}/staffs`,
+      url: `${
+        import.meta.env.VITE_PUBLIC_API_URL
+      }/api/v5/businesses/${businessId}/staffs`,
       config: {
         //   params,
         //   gtmEventName: "FETCH_STAFF_LIST_BUSINESSES",
@@ -25,10 +27,13 @@ export const fetchStaffListLoader =
     const { businessId } = params ?? {};
     if (businessId) {
       const query = fetchStaffListQuery({ businessId });
-
+      
       return (
         queryClient.getQueryData(query.queryKey) ||
-        (await queryClient.fetchQuery({ ...query }))
+        (await queryClient.fetchQuery({
+          ...query,
+          // staleTime: 20000 * 60 * 2,
+        }))
       );
     }
   };
