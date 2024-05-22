@@ -7,10 +7,12 @@ export default function Root() {
   const params = useParams();
   const res = useLoaderData();
   const data = res ?? {};
-
-
+  const { businessId } = params ?? {};
+  //  < style={{ display: "flex", flexDirection: "column" }}>
   return (
     <>
+      <Link to={`/${businessId}/staff`}>Back to Staff1</Link>
+      <Link to={`/${businessId}/staff2`}>Back to Staff2</Link>
       <Outlet />
       {/* <Suspense fallback={<div>loading main...</div>}>
         <div id="sidebar">

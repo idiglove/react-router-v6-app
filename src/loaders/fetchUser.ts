@@ -12,8 +12,6 @@ export const fetchUserQuery = () => ({
       config: {},
     });
 
-    console.log({data})
-
     return data?.data?.data ?? {};
   },
 });
@@ -31,9 +29,9 @@ export const fetchUserLoader =
 
       const cache = queryClient.getQueryData(queryKey);
 
-      console.log({
-        cache,
-      });
+      // console.log({
+      //   cache,
+      // });
 
       return (
         cache ||

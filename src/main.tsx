@@ -15,6 +15,7 @@ import EditStaff, {
 import { fetchUserLoader } from "./loaders/fetchUser";
 import SingleStaff from "./containers/Staff/SingleStaff";
 import Staff from "./containers/Staff";
+import Staff2 from "./containers/Staff2";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     loader: fetchUserLoader(queryClient),
+    id: "root",
     children: [
       {
         path: "/:businessId/staff/",
@@ -59,29 +61,29 @@ const router = createBrowserRouter([
       },
       {
         path: "/:businessId/staff2/",
-        element: <Staff />,
+        element: <Staff2 />,
         errorElement: <ErrorPage />,
-        loader: fetchStaffListLoader(queryClient),
+        // loader: fetchStaffListLoader(queryClient),
         // id: "staffRoot",
-        children: [
-          {
-            path: "/:businessId/staff2/:staffId",
-            element: <SingleStaff />,
-            errorElement: <ErrorPage />,
-            loader: fetchStaffLoader(queryClient),
-            // id: "staffRoot",
-          },
-        ],
+        // children: [
+        //   {
+        //     path: "/:businessId/staff2/:staffId",
+        //     element: <SingleStaff />,
+        //     errorElement: <ErrorPage />,
+        //     // loader: fetchStaffLoader(queryClient),
+        //     // id: "staffRoot",
+        //   },
+        // ],
       },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      {/* <ReactQueryDevtools initialIsOpen={false} client={queryClient} /> */}
-    </QueryClientProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+    {/* <ReactQueryDevtools initialIsOpen={false} client={queryClient} /> */}
+  </QueryClientProvider>
+  // </React.StrictMode>
 );
