@@ -25,12 +25,12 @@ export const fetchStaffLoader =
   async ({ params }) => {
     const { businessId, staffId } = params ?? {};
     const query = fetchStaffQuery({ businessId, staffId });
-    
+
     return (
-      queryClient.getQueryData(query.queryKey) ||
-      (await queryClient.fetchQuery({
+      // queryClient.getQueryData(query.queryKey) ||
+      await queryClient.fetchQuery({
         ...query,
         // staleTime: 20000 * 60 * 2
-      }))
+      })
     );
   };

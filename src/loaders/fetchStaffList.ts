@@ -27,13 +27,13 @@ export const fetchStaffListLoader =
     const { businessId } = params ?? {};
     if (businessId) {
       const query = fetchStaffListQuery({ businessId });
-      
+
       return (
-        queryClient.getQueryData(query.queryKey) ||
-        (await queryClient.fetchQuery({
+        // queryClient.getQueryData(query.queryKey) ||
+        await queryClient.fetchQuery({
           ...query,
           // staleTime: 20000 * 60 * 2,
-        }))
+        })
       );
     }
   };

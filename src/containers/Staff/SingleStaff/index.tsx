@@ -5,11 +5,12 @@ import { fetchStaffQuery } from "../../../loaders/fetchStaff";
 export default function SingleStaff() {
   const params = useParams();
   const res = useLoaderData();
-  const { data } = useQuery({
-    ...fetchStaffQuery({ ...params }),
-    initialData: res,
-    staleTime: 1000 * 60 * 2,
-  });
+  const data = res ?? {};
+  // const { data } = useQuery({
+  //   ...fetchStaffQuery({ ...params }),
+  //   initialData: res,
+  //   staleTime: 1000 * 60 * 2,
+  // });
   return (
     <div id="staff">
       <div>

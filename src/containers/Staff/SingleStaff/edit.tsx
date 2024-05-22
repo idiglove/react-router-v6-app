@@ -13,12 +13,12 @@ export const action =
     const staff = JSON.parse(localStorage.getItem("staff") ?? "");
     staff.bookableInfo.createStrategy = "new";
     await updateStaff({ ...staff, ...updates }, params);
-    await queryClient.invalidateQueries({
-      queryKey: staffQueryKeysGenerator.allStaff(businessId),
-    });
-    await queryClient.invalidateQueries({
-      queryKey: staffQueryKeysGenerator.fetchStaff(businessId, staffId),
-    });
+    // await queryClient.invalidateQueries({
+    //   queryKey: staffQueryKeysGenerator.allStaff(businessId),
+    // });
+    // await queryClient.invalidateQueries({
+    //   queryKey: staffQueryKeysGenerator.fetchStaff(businessId, staffId),
+    // });
     // return null;
     return redirect(`/${businessId}/staff/${staffId}`);
   };

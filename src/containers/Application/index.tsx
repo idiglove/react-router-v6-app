@@ -5,14 +5,14 @@ import { fetchStaffListQuery } from "../../loaders/fetchStaffList";
 export default function Root() {
   const params = useParams();
   const res = useLoaderData();
-  // const data = res ?? {};
+  const data = res ?? {};
   const { businessId } = params ?? {};
 
-  const { data } = useQuery({
-    ...fetchStaffListQuery({ ...params }),
-    initialData: res,
-    staleTime: 1000 * 60 * 2, //add this if you want to cache the data
-  });
+  // const { data } = useQuery({
+  //   ...fetchStaffListQuery({ ...params }),
+  //   initialData: res,
+  //   staleTime: 1000 * 60 * 2, //add this if you want to cache the data
+  // });
   const { items } = data ?? {};
 
   return (
